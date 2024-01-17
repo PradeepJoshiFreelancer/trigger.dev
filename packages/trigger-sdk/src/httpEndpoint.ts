@@ -12,6 +12,7 @@ import { TriggerClient } from "./triggerClient";
 import { EventSpecification, EventSpecificationExample, Trigger, VerifyResult } from "./types";
 import { formatSchemaErrors } from "./utils/formatSchemaErrors";
 import { slugifyId } from "./utils";
+import { z } from "zod"
 
 type HttpEndpointOptions<TEventSpecification extends EventSpecification<any>> = {
   id: string;
@@ -162,6 +163,10 @@ export type EndpointOptions = {
 
    */
   verify: VerifyCallback;
+   /*
+  This is the zod schema for validating the request
+  */
+  schema?: z.ZodType<z.ZodSchema<any>>
 };
 
 export function httpEndpoint(options: EndpointOptions): HttpEndpoint<EventSpecification<Request>> {
